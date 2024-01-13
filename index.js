@@ -1,6 +1,15 @@
 const express = require('express')
 const app = express()
 const port = 5000
+
+app.use((req,res,next)=>{
+  res.setHeader('Access-Control-Allow-Origin',"http://localhost:3000");
+  res.header(
+    'Access-Control-Allow-Headers',
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+})
 const mongoose = require('mongoose');
 const mongoURI = 'mongodb+srv://vihanganirmitha200:Nirmithamongodb@cluster0.saaop4p.mongodb.net/gofood?retryWrites=true&w=majority'
 const connectionparams = {
