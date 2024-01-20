@@ -20,9 +20,18 @@ mongoose.connect(mongoURI,connectionparams)
 .then(async () =>{
     console.info("connected to DB")
     const foodItemsCollection = mongoose.connection.db.collection("food_items");
+    const foodCategoryCollection = mongoose.connection.db.collection("foodCategory");
     try {
       const data = await foodItemsCollection.find({}).toArray();
-      console.log();
+      try {
+        const catdata = await foodCategoryCollection.find({}).toArray();
+        global.food_category = catdata;
+        console.log(global.food_items);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+      global.food_items = data;
+      console.log(global.food_items);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -37,6 +46,7 @@ app.get('/', (req, res) => {
 })
 app.use(express.json())
 app.use("/api", require("./Routes/CreateUser"))
+app.use("/api", require("./Routes/DisplayData"))
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
