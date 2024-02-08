@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const hostname = '0.0.0.0';
 const port = 5000
+// app.listen(port, '0.0.0.0', () => {
+//   console.log(`Server is listening on port ${port}`);
+// });
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', "http://localhost:3000");

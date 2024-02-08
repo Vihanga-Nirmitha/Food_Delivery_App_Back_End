@@ -57,7 +57,6 @@ router.post("/loginuser", [
 
         }
         const pwtcompare = await bcrypt.compare(req.body.password,userdata.password)
-        console.log(pwtcompare);
          if (!pwtcompare) {
             return res.status(400).json({ errors: "Invalid password" });
         }
